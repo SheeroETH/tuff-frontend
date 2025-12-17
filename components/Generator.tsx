@@ -40,11 +40,28 @@ export const Generator: React.FC = () => {
   };
 
   const toggleModifier = (modifier: Modifiers) => {
-    setModifiers(prev =>
-      prev.includes(modifier)
-        ? prev.filter(m => m !== modifier)
-        : [...prev, modifier]
-    );
+    setModifiers(prev => {
+      if (modifier === 'Group') {
+        if (prev.includes('Group')) {
+          return prev.filter(m => !['Group', 'Diamond Cross', 'Cuban Chain'].includes(m));
+        } else {
+          const others = prev.filter(m => !['Diamond Cross', 'Cuban Chain'].includes(m));
+          return [...others, 'Diamond Cross', 'Cuban Chain', 'Group'];
+        }
+      }
+
+      if (prev.includes(modifier)) {
+        return prev.filter(m => m !== modifier && m !== 'Group');
+      } else {
+        const newMods = prev.filter(m => {
+          if (m === 'Group') return false;
+          if (modifier === 'Diamond Cross' && m === 'Cuban Chain') return false;
+          if (modifier === 'Cuban Chain' && m === 'Diamond Cross') return false;
+          return true;
+        });
+        return [...newMods, modifier];
+      }
+    });
   };
 
   const handleGenerate = async () => {
