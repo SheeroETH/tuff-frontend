@@ -4,7 +4,8 @@ export const generatePFP = async (base64Image: string, modifiers: string[]): Pro
     // Modifiers are currently ignored by the backend logic provided, 
     // as the prompt is fixed to the specific "darkened black and white" description.
 
-    const response = await fetch('http://localhost:3001/api/generate', {
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    const response = await fetch(`${apiUrl}/api/generate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
