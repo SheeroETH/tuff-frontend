@@ -41,25 +41,11 @@ export const Generator: React.FC = () => {
 
   const toggleModifier = (modifier: Modifiers) => {
     setModifiers(prev => {
-      if (modifier === 'Group') {
-        if (prev.includes('Group')) {
-          return prev.filter(m => !['Group', 'Diamond Cross', 'Cuban Chain'].includes(m));
-        } else {
-          const others = prev.filter(m => !['Diamond Cross', 'Cuban Chain'].includes(m));
-          return [...others, 'Diamond Cross', 'Cuban Chain', 'Group'];
-        }
-      }
-
+      // These options are mutually exclusive modes
       if (prev.includes(modifier)) {
-        return prev.filter(m => m !== modifier && m !== 'Group');
+        return []; // Deselect if already selected
       } else {
-        const newMods = prev.filter(m => {
-          if (m === 'Group') return false;
-          if (modifier === 'Diamond Cross' && m === 'Cuban Chain') return false;
-          if (modifier === 'Cuban Chain' && m === 'Diamond Cross') return false;
-          return true;
-        });
-        return [...newMods, modifier];
+        return [modifier]; // Select the new mode, clearing others
       }
     });
   };
@@ -134,7 +120,7 @@ export const Generator: React.FC = () => {
             <div className="space-y-3">
               <label className="text-xs font-bold uppercase tracking-widest text-white/70">Select Modifiers</label>
               <div className="flex flex-wrap gap-3">
-                {(['Diamond Cross', 'Cuban Chain', 'Group'] as Modifiers[]).map((mod) => (
+                {(['Cuban Chain', 'Cuban Chain + Diamond Cross', 'Teeth & Eyes', 'Group'] as Modifiers[]).map((mod) => (
                   <button
                     key={mod}
                     onClick={() => toggleModifier(mod)}
