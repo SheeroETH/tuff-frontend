@@ -1,4 +1,4 @@
-export type Modifiers = 'Cuban Chain' | 'Cuban Chain + Diamond Cross' | 'Teeth & Eyes' | 'Group';
+export type Modifiers = 'Cuban Chain' | 'Cuban Chain + Diamond Cross';
 
 export interface PFPState {
   originalImage: string | null;

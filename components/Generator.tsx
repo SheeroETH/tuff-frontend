@@ -120,7 +120,7 @@ export const Generator: React.FC = () => {
             <div className="space-y-3">
               <label className="text-xs font-bold uppercase tracking-widest text-white/70">Select Modifiers</label>
               <div className="flex flex-wrap gap-3">
-                {(['Cuban Chain', 'Cuban Chain + Diamond Cross', 'Teeth & Eyes', 'Group'] as Modifiers[]).map((mod) => (
+                {(['Cuban Chain', 'Cuban Chain + Diamond Cross'] as Modifiers[]).map((mod) => (
                   <button
                     key={mod}
                     onClick={() => toggleModifier(mod)}
